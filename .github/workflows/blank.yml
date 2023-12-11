@@ -1,0 +1,26 @@
+name: Trigger Repo C Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Repo C Workflow
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.MY_REPO_C_TOKEN }}
+          script: |
+            const response = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+              owner: 'owner_of_repo_c',
+              repo: 'repo_c_name',
+              workflow_id: 'workflow_c_id',
+              ref: 'main', // or specify the branch name you want to trigger in Repo C
+              inputs: {
+                repoName: 'Repo A' // or 'Repo B', as per context
+              }
+            });
+            console.log(response);
