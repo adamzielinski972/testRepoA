@@ -1,4 +1,4 @@
-import requests
+import urllib.request
 import json
 import re
 import base64
@@ -41,7 +41,7 @@ jobs:
 '''
 
 # Lines to preserve (provide regex pattern to identify the lines)
-preserve_lines_pattern = r'^(\s+- #hello)'  # Pattern to preserve line 7
+preserve_lines_pattern = r'^(\s+- #test)'  # Pattern to preserve line 7
 
 # Function to update workflow file in a repository
 def update_workflow_file(repo):
@@ -51,13 +51,11 @@ def update_workflow_file(repo):
     }
 
     # Get current workflow file content
-    get_workflow_url = f'https://api.github.com/repos/{org_name}/{repo}/contents/blank.yml'
-    response = requests.get(get_workflow_url, headers=headers)
+    get_workflow_url = f'https://api.github.com/repos/{org_name}/{repo}/contents/workflow_file.yml'
+    req = urllib.request.Request(get_workflow_url, headers=headers)
 
-    if response.status_code == 200:
-        current_content = response.json()
-
-        # Decode base64 content to string
+    with urllib.request.urlopen(req) as response:
+        current_content = json.loads(response.read().decode())
         existing_content = base64.b64decode(current_content['content']).decode('utf-8')
 
         # Find and preserve lines matching the pattern
@@ -73,17 +71,15 @@ def update_workflow_file(repo):
             "content": base64.b64encode(updated_content.encode()).decode(),
             "sha": current_content['sha']
         }
-        update_response = requests.put(update_workflow_url, headers=headers, json=data)
+        req = urllib.request.Request(update_workflow_url, headers=headers, data=json.dumps(data).encode(), method='PUT')
+        response = urllib.request.urlopen(req)
 
-        if update_response.status_code == 200:
+        if response.getcode() == 200:
             print(f"Workflow file updated successfully in {repo}")
         else:
             print(f"Failed to update workflow file in {repo}")
-            print(update_response.text)
-    else:
-        print(f"Workflow file not found in {repo}")
-        print(response.text)
-
+            print(response.read().decode())
+        
 # Update workflow file in each repository
 for repo in repos_list:
     update_workflow_file(repo)
