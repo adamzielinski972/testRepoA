@@ -1,0 +1,24 @@
+name: Update Workflows
+
+on:
+  workflow_dispatch:  # Manual trigger event
+
+jobs:
+  update-workflows:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Replace with the Python version you want to use
+
+      - name: Run the script to update workflows
+        run: |
+          python update_workflows.py  # Replace with the correct filename if needed
+          # You might need to include the path to the script if it's not in the root directory
+
+        env:
+          ACCESS_TOKEN: ${{ secrets.REPO_C_ACCESS_TOKEN }}
