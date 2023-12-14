@@ -162,7 +162,7 @@ def update_workflow(repo):
         line_63_to_70 = "\n".join(lines[62:70])
 
         # Update the workflow file content excluding line 63-70
-        updated_content = "\n".join(lines[:62] + lines[70:)  # Exclude line 63-70
+        updated_content = "\n".join(lines[:62] + lines[70:])  # Exclude line 63-70
 
         # Append the updated content to retain line 7 and other contents
         updated_workflow_content = updated_content + f"\n      {line_63_to_70}\n" + """
