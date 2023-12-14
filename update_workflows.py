@@ -1,7 +1,10 @@
 from github import Github
+import os
 
 # GitHub credentials
-github_token = 'WORKFLOW_TOKEN'  # Replace with your GitHub token
+# github_token = 'WORKFLOW_TOKEN'  # Replace with your GitHub token
+
+github_token = os.environ.get('ACCESS_TOKEN')
 
 username = 'adamzielinski972'
 
