@@ -6,7 +6,7 @@ github_token = 'WORKFLOW_TOKEN'  # Replace with your GitHub token
 username = 'adamzielinski972'
 
 # List of repositories where you want to update workflows
-repos_to_update = ['repo_A', 'repo_B', 'repo_C']  # Replace with repository names
+repos_to_update = ['testRepoA', 'testRepoB', 'testRepoC']  # Replace with repository names
 
 # Workflow file content to be updated
 updated_workflow_content = """
