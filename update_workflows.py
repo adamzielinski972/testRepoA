@@ -27,10 +27,10 @@ jobs:
 def update_workflow(repo):
     try:
         # Get the workflow file
-        workflow_file = repo.get_contents('.github/workflows/main.yml')
+        workflow_file = repo.get_contents('.github/workflows/blank.yml')
         
         # Update the workflow file content
-        repo.update_file('.github/workflows/main.yml', 'Updated workflow', updated_workflow_content, workflow_file.sha)
+        repo.update_file('.github/workflows/blank.yml', 'Updated workflow', updated_workflow_content, workflow_file.sha)
         print(f"Workflow updated in {repo.full_name}")
     except Exception as e:
         print(f"An error occurred while updating workflow in {repo.full_name}: {str(e)}")
