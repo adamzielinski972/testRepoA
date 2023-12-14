@@ -24,4 +24,4 @@ jobs:
           # You might need to include the path to the script if it's not in the root directory
 
         env:
-          ACCESS_TOKEN: ${{ secrets.REPO_C_ACCESS_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
