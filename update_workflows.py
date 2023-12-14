@@ -72,16 +72,12 @@ def update_workflow(repo):
         # Get the workflow file
         workflow_file = repo.get_contents('.github/workflows/blank.yml')
         old_content = workflow_file.decoded_content.decode('utf-8')
-
-        # Preserve line 63-70 content
+      
         lines = old_content.split('\n')
         line_63_to_70 = "\n".join(lines[62:70])
+        print(line_63_to_70)
 
-        # Update the workflow file content excluding line 63-70
-        #updated_content = "\n".join(lines[:62] + lines[70:])  # Exclude line 63-70
-
-        # Append the updated content to retain line 7 and other contents
-        updated_workflow_content += f"\n{line_63_to_70}\n" + """
+        updated_workflow_content = updated_workflow_content + f"\n{line_63_to_70}\n" + """
            env:
                 GITHUBUSER: ${{ secrets.MY_GITHUB_USER }}
                 GITHUBTOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
