@@ -171,7 +171,7 @@ def update_workflow(repo):
           # Add more updated steps here
         """
         #Test
-        ""'
+        """
         # Update the workflow file content
         repo.update_file('.github/workflows/blank.yml', 'Updated workflow', updated_workflow_content, workflow_file.sha)
         print(f"Workflow updated in {repo.full_name}")
