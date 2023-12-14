@@ -60,14 +60,6 @@ jobs:
         output_dot=$(echo "$output_slash" | sed 's#\.#-#g')
         echo "BRANCH_NAME=$output_dot" >> $GITHUB_ENV
 
-    - uses: actions/upload-artifact@v3
-      with:
-        name: war-artifact
-        path: DEV_DEPLOY/search.war
-    - uses: actions/upload-artifact@v3
-      with:
-        name: config-artifact
-        path: conf/aws/search.yml
     env:
         GITHUBUSER: ${{ secrets.MY_GITHUB_USER }}
         GITHUBTOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
@@ -134,3 +126,15 @@ jobs:
         aws-region: ca-central-1
     - name: Deploy war to dev S3 bucket
       run: aws s3 sync ./confartifact/ s3://middletiersupportlambas-staging-otns3repo-1udoysujifa6k/${{needs.build.outputs.output1}}/WAR-config/
+
+          - uses: actions/upload-artifact@v3
+      with:
+        name: war-artifact
+        path: DEV_DEPLOY/search.war
+    - uses: actions/upload-artifact@v3
+      with:
+        name: config-artifact
+        path: conf/aws/search.yml
+
+          # Add more updated steps here
+        
