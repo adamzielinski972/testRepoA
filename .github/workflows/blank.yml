@@ -1,20 +1,13 @@
-name: Send Hello to Repo C
+
+name: Updated Workflow
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-#test
-#testing
-
 jobs:
-  send_hello:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Hello to Repo C
-        run: |
-          curl -X POST \
-            -H "Accept: application/vnd.github.everest-preview+json" \
-            -H "Authorization: token ${{ secrets.REPO_C_ACCESS_TOKEN }}" \
-            -d '{"event_type": "hello-event", "client_payload": {"message": "hello"}}' \
-            https://api.github.com/repos/adamzielinski972/testRepoC/dispatches
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # Add your workflow steps here
