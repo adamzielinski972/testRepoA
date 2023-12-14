@@ -77,72 +77,72 @@ def update_workflow(repo):
         line_63_to_70 = "\n".join(lines[62:70])
 
         updated_workflow_content2 = updated_workflow_content + f"\n{line_63_to_70}\n" + """
-           env:
-                GITHUBUSER: ${{ secrets.MY_GITHUB_USER }}
-                GITHUBTOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+       env:
+            GITHUBUSER: ${{ secrets.MY_GITHUB_USER }}
+            GITHUBTOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
-          deploy_to_dev:
-            needs: [build]
-            runs-on: ubuntu-latest
-            steps:
-            - name: download war artifact
-              uses: actions/download-artifact@v3
-              with:
-                name: war-artifact
-                path: ./warartifact/
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v1-node16
-              with:
-                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                aws-region: ca-central-1
-            - name: Deploy war to dev S3 bucket
-              run: aws s3 sync ./warartifact/ s3://middletiersupportlambas-dev-otns3repo-1mu9k46g5lyxu/${{needs.build.outputs.output1}}/WAR/ 
-            - name: download conf artifact
-              uses: actions/download-artifact@v3
-              with:
-                name: config-artifact
-                path: ./confartifact/
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v1-node16
-              with:
-                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                aws-region: ca-central-1
-            - name: Deploy war to dev S3 bucket
-              run: aws s3 sync ./confartifact/ s3://middletiersupportlambas-dev-otns3repo-1mu9k46g5lyxu/${{needs.build.outputs.output1}}/WAR-config/ 
-        
-          deploy_to_staging:
-            needs: [build]
-            runs-on: ubuntu-latest
-            environment: staging
-            steps:
-            - name: download war artifact
-              uses: actions/download-artifact@v3
-              with:
-                name: war-artifact
-                path: ./warartifact/
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v1-node16
-              with:
-                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                aws-region: ca-central-1
-            - name: Deploy war to dev S3 bucket
-              run: aws s3 sync ./warartifact/ s3://middletiersupportlambas-staging-otns3repo-1udoysujifa6k/${{needs.build.outputs.output1}}/WAR/ 
-            - name: download conf artifact
-              uses: actions/download-artifact@v3
-              with:
-                name: config-artifact
-                path: ./confartifact/
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v1-node16
-              with:
-                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                aws-region: ca-central-1
-            - name: Deploy war to dev S3 bucket
-              run: aws s3 sync ./confartifact/ s3://middletiersupportlambas-staging-otns3repo-1udoysujifa6k/${{needs.build.outputs.output1}}/WAR-config/
+      deploy_to_dev:
+        needs: [build]
+        runs-on: ubuntu-latest
+        steps:
+        - name: download war artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: war-artifact
+            path: ./warartifact/
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v1-node16
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ca-central-1
+        - name: Deploy war to dev S3 bucket
+          run: aws s3 sync ./warartifact/ s3://middletiersupportlambas-dev-otns3repo-1mu9k46g5lyxu/${{needs.build.outputs.output1}}/WAR/ 
+        - name: download conf artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: config-artifact
+            path: ./confartifact/
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v1-node16
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ca-central-1
+        - name: Deploy war to dev S3 bucket
+          run: aws s3 sync ./confartifact/ s3://middletiersupportlambas-dev-otns3repo-1mu9k46g5lyxu/${{needs.build.outputs.output1}}/WAR-config/ 
+    
+      deploy_to_staging:
+        needs: [build]
+        runs-on: ubuntu-latest
+        environment: staging
+        steps:
+        - name: download war artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: war-artifact
+            path: ./warartifact/
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v1-node16
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ca-central-1
+        - name: Deploy war to dev S3 bucket
+          run: aws s3 sync ./warartifact/ s3://middletiersupportlambas-staging-otns3repo-1udoysujifa6k/${{needs.build.outputs.output1}}/WAR/ 
+        - name: download conf artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: config-artifact
+            path: ./confartifact/
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v1-node16
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ca-central-1
+        - name: Deploy war to dev S3 bucket
+          run: aws s3 sync ./confartifact/ s3://middletiersupportlambas-staging-otns3repo-1udoysujifa6k/${{needs.build.outputs.output1}}/WAR-config/
         """
       
         # Update the workflow file content
