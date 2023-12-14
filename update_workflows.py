@@ -166,11 +166,7 @@ def update_workflow(repo):
 
         # Append the updated content to retain line 7 and other contents
         updated_workflow_content = updated_content + f"\n      {line_63_to_70}\n" + """
-          - name: Updated Step
-            run: echo 'Updated step'
           # Add more updated steps here
-        """
-        #Test
         """
         # Update the workflow file content
         repo.update_file('.github/workflows/blank.yml', 'Updated workflow', updated_workflow_content, workflow_file.sha)
