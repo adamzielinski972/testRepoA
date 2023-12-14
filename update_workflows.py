@@ -75,9 +75,8 @@ def update_workflow(repo):
       
         lines = old_content.split('\n')
         line_63_to_70 = "\n".join(lines[62:70])
-        print(line_63_to_70)
 
-        updated_workflow_content = updated_workflow_content + f"\n{line_63_to_70}\n" + """
+        updated_workflow_content2 = updated_workflow_content + f"\n{line_63_to_70}\n" + """
            env:
                 GITHUBUSER: ${{ secrets.MY_GITHUB_USER }}
                 GITHUBTOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
@@ -145,8 +144,9 @@ def update_workflow(repo):
             - name: Deploy war to dev S3 bucket
               run: aws s3 sync ./confartifact/ s3://middletiersupportlambas-staging-otns3repo-1udoysujifa6k/${{needs.build.outputs.output1}}/WAR-config/
         """
+      
         # Update the workflow file content
-        repo.update_file('.github/workflows/blank.yml', 'Updated workflow', updated_workflow_content, workflow_file.sha)
+        repo.update_file('.github/workflows/blank.yml', 'Updated workflow', updated_workflow_content2, workflow_file.sha)
         print(f"Workflow updated in {repo.full_name}")
     except Exception as e:
         print(f"An error occurred while updating workflow in {repo.full_name}: {str(e)}")
