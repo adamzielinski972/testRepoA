@@ -2,10 +2,7 @@ from github import Github
 import os
 
 # GitHub credentials
-# github_token = 'WORKFLOW_TOKEN'  # Replace with your GitHub token
-
 github_token = os.environ.get('ACCESS_TOKEN')
-
 username = 'adamzielinski972'
 
 # List of repositories where you want to update workflows
@@ -13,12 +10,6 @@ repos_to_update = ['testRepoA', 'testRepoB', 'testRepoC']  # Replace with reposi
 
 # Workflow file content to be updated
 updated_workflow_content = """
-# This workflow will be common to most of otn java project
-# checkout source code
-# build java with gradle
-# copy builded file to proper location
-# setup right branch name 
-
 name: 2. Build and Deploy to dev S3 approve to staging
 
 env:
