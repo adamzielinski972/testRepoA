@@ -1,5 +1,5 @@
 
-name: Updated Workflow
+name: Test
 on:
   push:
     branches:
