@@ -74,6 +74,7 @@ jobs:
         output_slash=$(echo "$input" | sed 's#/#-#g')
         output_dot=$(echo "$output_slash" | sed 's#\.#-#g')
         echo "BRANCH_NAME=$output_dot" >> $GITHUB_ENV
+        #Test
 """
 
 def update_workflow(repo):
