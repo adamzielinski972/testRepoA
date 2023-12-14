@@ -76,7 +76,7 @@ def update_workflow(repo):
         lines = old_content.split('\n')
         line_63_to_70 = "\n".join(lines[62:70])
 
-        updated_workflow_content2 = updated_workflow_content + f"\n{line_63_to_70}\n" + """
+        updated_workflow_content2 = updated_workflow_content + f"{line_63_to_70}\n" + """
      env:
           GITHUBUSER: ${{ secrets.MY_GITHUB_USER }}
           GITHUBTOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
