@@ -3,6 +3,8 @@ from github import Github
 # GitHub credentials
 github_token = 'WORKFLOW_TOKEN'  # Replace with your GitHub token
 
+username = 'adamzielinski972'
+
 # List of repositories where you want to update workflows
 repos_to_update = ['repo_A', 'repo_B', 'repo_C']  # Replace with repository names
 
@@ -39,7 +41,7 @@ def main():
 
     # Update workflows in each repository
     for repo_name in repos_to_update:
-        repo = g.get_repo(f'{adamzielinski972}/{repo_name}')
+        repo = g.get_repo(f'{username}/{repo_name}')
         update_workflow(repo)
 
 if __name__ == "__main__":
