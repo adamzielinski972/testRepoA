@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-#Test1
 
 jobs:
   build:
@@ -13,3 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       # Add your workflow steps here
+
+      #Test1
+
+          - name: Updated Step
+            run: echo 'Updated step'
+          # Add more updated steps here
+        
