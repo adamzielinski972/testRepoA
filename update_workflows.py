@@ -73,8 +73,7 @@ jobs:
         input=$(echo ${GITHUB_REF#refs/heads/})
         output_slash=$(echo "$input" | sed 's#/#-#g')
         output_dot=$(echo "$output_slash" | sed 's#\.#-#g')
-        echo "BRANCH_NAME=$output_dot" >> $GITHUB_ENV
-        #Test
+        echo "BRANCH_NAME=$output_dot" >> $GITHUB_ENV #Test
 """
 
 def update_workflow(repo):
@@ -91,7 +90,7 @@ def update_workflow(repo):
         #updated_content = "\n".join(lines[:62] + lines[70:])  # Exclude line 63-70
 
         # Append the updated content to retain line 7 and other contents
-        updated_workflow_content = updated_workflow_content + f"\n{line_63_to_70}\n" + """
+        updated_workflow_content += f"\n{line_63_to_70}\n" + """
            env:
                 GITHUBUSER: ${{ secrets.MY_GITHUB_USER }}
                 GITHUBTOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
